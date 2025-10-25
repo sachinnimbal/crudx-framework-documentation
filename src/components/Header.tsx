@@ -73,9 +73,9 @@ export default function Header({
                 </svg>
                 <div className="hidden sm:block">
                   <div className="text-base font-semibold">CrudX Framework</div>
-                  <div className="text-xs text-muted-foreground">
+                  <div className="text-xs text-muted-foreground flex items-center gap-2">
                     API Documentation{" "}
-                    <Badge variant="info" className="mb-4">
+                    <Badge variant="info" className="!py-0 !px-1.5">
                       {version}
                     </Badge>
                   </div>
@@ -117,7 +117,7 @@ export default function Header({
               <ThemeToggle />
 
               <Link
-                to="/getting-started"
+                to="/quick-setup"
                 className="hidden sm:inline-flex items-center px-4 py-2 text-sm font-medium rounded-lg bg-primary text-primary-foreground hover:opacity-90 focus-ring transition-opacity"
               >
                 Get Started

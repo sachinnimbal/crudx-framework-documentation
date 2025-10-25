@@ -10,13 +10,13 @@ interface SearchResult {
   excerpt: string;
 }
 
-// Mock search data - in production, this would come from a search index
+// Updated search data for CrudX
 const searchData: SearchResult[] = [
-  { title: 'Overview', path: '/overview', excerpt: 'Get started with the documentation' },
-  { title: 'Getting Started', path: '/getting-started', excerpt: 'Quick start guide and installation' },
-  { title: 'Annotations', path: '/annotations', excerpt: 'Learn about annotations and decorators' },
-  { title: 'Entities', path: '/entities', excerpt: 'Working with entities and models' },
-  { title: 'REST Endpoints', path: '/rest-endpoints', excerpt: 'API endpoints and HTTP methods' },
+  { title: 'Overview', path: '/overview', excerpt: 'Introduction to CrudX Framework and key features' },
+  { title: 'Quick Setup', path: '/quick-setup', excerpt: 'Get started in 5 minutes with step-by-step guide' },
+  { title: 'Core Annotations', path: '/core-annotations', excerpt: '@CrudX, @CrudXUniqueConstraint, @CrudXImmutable' },
+  { title: 'Base Entities', path: '/base-entities', excerpt: 'MySQL, PostgreSQL, and MongoDB entity classes' },
+  { title: 'REST Endpoints', path: '/rest-endpoints', excerpt: '11 auto-generated REST API endpoints' },
 ];
 
 interface SearchBoxProps {

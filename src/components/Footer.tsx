@@ -1,4 +1,4 @@
-import { CommandLineIcon, ArrowTopRightOnSquareIcon, BriefcaseIcon } from '@heroicons/react/24/outline';
+import { CommandLineIcon, ArrowTopRightOnSquareIcon, BookOpenIcon } from '@heroicons/react/24/outline';
 
 export default function Footer() {
   return (
@@ -7,56 +7,56 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           {/* Copyright */}
           <div className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Premium Docs. All rights reserved.
+            © {new Date().getFullYear()} CrudX Framework. All rights reserved.
           </div>
 
           {/* Links */}
           <div className="flex items-center gap-6">
             <a
-              href="https://github.com"
+              href="https://github.com/sachinnimbal/crudx-framework"
               target="_blank"
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-foreground transition-colors focus-ring rounded"
               aria-label="GitHub"
-              title="GitHub"
+              title="GitHub Repository"
             >
               <CommandLineIcon className="w-5 h-5" />
             </a>
             <a
-              href="https://twitter.com"
+              href="https://sachinnimbal.github.io/crudx-framework/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-foreground transition-colors focus-ring rounded"
-              aria-label="Twitter"
-              title="Twitter/X"
+              aria-label="Documentation"
+              title="Official Documentation"
             >
-              <ArrowTopRightOnSquareIcon className="w-5 h-5" />
+              <BookOpenIcon className="w-5 h-5" />
             </a>
             <a
-              href="https://linkedin.com"
+              href="https://mvnrepository.com/artifact/io.github.sachinnimbal/crudx-starter"
               target="_blank"
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-foreground transition-colors focus-ring rounded"
-              aria-label="LinkedIn"
-              title="LinkedIn"
+              aria-label="Maven Central"
+              title="Maven Central Repository"
             >
-              <BriefcaseIcon className="w-5 h-5" />
+              <ArrowTopRightOnSquareIcon className="w-5 h-5" />
             </a>
           </div>
         </div>
 
         {/* Additional Links */}
         <div className="flex flex-wrap items-center justify-center gap-4 mt-4 text-sm">
-          <a href="#" className="text-muted-foreground hover:text-foreground transition-colors focus-ring rounded px-2 py-1">
-            Privacy Policy
+          <a href="https://github.com/sachinnimbal/crudx-framework#license" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors focus-ring rounded px-2 py-1">
+            MIT License
           </a>
           <span className="text-muted-foreground">•</span>
-          <a href="#" className="text-muted-foreground hover:text-foreground transition-colors focus-ring rounded px-2 py-1">
-            Terms of Service
+          <a href="https://github.com/sachinnimbal/crudx-framework/issues" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors focus-ring rounded px-2 py-1">
+            Report Issues
           </a>
           <span className="text-muted-foreground">•</span>
-          <a href="#" className="text-muted-foreground hover:text-foreground transition-colors focus-ring rounded px-2 py-1">
-            Contact Us
+          <a href="https://github.com/sachinnimbal/crudx-framework/discussions" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors focus-ring rounded px-2 py-1">
+            Community
           </a>
         </div>
       </div>

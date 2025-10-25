@@ -10,7 +10,6 @@ const navigation = [
     items: [
       { title: 'Overview', path: '/overview', icon: DocumentTextIcon },
       { title: 'Quick Setup', path: '/quick-setup', icon: RocketLaunchIcon },
-      { title: 'Getting Started', path: '/getting-started', icon: RocketLaunchIcon },
     ],
   },
   {
@@ -18,8 +17,6 @@ const navigation = [
     items: [
       { title: 'Core Annotations', path: '/core-annotations', icon: TagIcon },
       { title: 'Base Entities', path: '/base-entities', icon: CircleStackIcon },
-      { title: 'Annotations', path: '/annotations', icon: TagIcon },
-      { title: 'Entities', path: '/entities', icon: CircleStackIcon },
       { title: 'REST Endpoints', path: '/rest-endpoints', icon: BoltIcon },
     ],
   },

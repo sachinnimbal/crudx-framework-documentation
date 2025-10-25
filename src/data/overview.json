@@ -2,11 +2,11 @@
   "breadcrumbs": [{ "label": "Overview" }],
   "version": "v1.0.1",
   "hero": {
-    "title": "Welcome to",
+    "title": "Spring Boot",
     "highlight": "CrudX Framework",
-    "subtitle": "CrudX is a powerful Spring Boot framework that automatically generates production-ready REST APIs with zero boilerplate code. Built for developers who value rapid development without sacrificing control or customization.",
+    "subtitle": "Complete API Documentation - CrudX is a powerful Spring Boot framework that automatically generates production-ready REST APIs with zero boilerplate code. Built for developers who value rapid development without sacrificing control or customization.",
     "buttons": {
-      "getStarted": "Quick Start",
+      "getStarted": "Quick Setup",
       "viewOnGithub": "View on GitHub"
     }
   },
@@ -31,7 +31,7 @@
       {
         "icon": "RectangleStackIcon",
         "title": "Batch Operations",
-        "description": "Bulk create/delete with skip-on-duplicate support and comprehensive tracking."
+        "description": "Bulk create/delete with skip-on-duplicate support. Max 100,000 records per request."
       },
       {
         "icon": "LockClosedIcon",
@@ -51,7 +51,7 @@
       {
         "icon": "CpuChipIcon",
         "title": "Memory Optimized",
-        "description": "Cursor-based streaming for large datasets prevents OutOfMemory errors."
+        "description": "Intelligent 500-record chunking for large datasets prevents OutOfMemory errors."
       },
       {
         "icon": "ExclamationTriangleIcon",
@@ -60,13 +60,13 @@
       },
       {
         "icon": "BanknotesIcon",
-        "title": "Transaction Support",
-        "description": "Automatic transaction management with rollback on errors."
+        "title": "Immutable Fields",
+        "description": "@CrudXImmutable annotation protects fields from updates after creation."
       },
       {
         "icon": "GlobeAltIcon",
         "title": "RESTful APIs",
-        "description": "10+ auto-generated REST endpoints following industry best practices."
+        "description": "11 auto-generated REST endpoints following industry best practices."
       },
       {
         "icon": "BookOpenIcon",
@@ -77,11 +77,11 @@
   },
   "quickExample": {
     "title": "Quick Example",
-    "intro": "Here's a simple example to get you started:",
+    "intro": "Extend CrudXController - that's it! No additional code needed:",
     "alert": {
       "variant": "success",
-      "title": "Pro Tip",
-      "text": "Use our CLI tool to scaffold a new project with best practices and recommended configurations built-in."
+      "title": "You're All Set!",
+      "text": "11 REST endpoints are auto-generated instantly. Start your application and test at http://localhost:8080/swagger-ui/index.html"
     }
   },
   "nextSteps": {
@@ -89,29 +89,29 @@
     "intro": "Ready to dive deeper? Here are some resources to explore:",
     "links": [
       {
-        "path": "/getting-started",
-        "label": "Getting Started",
-        "desc": "Installation and setup guide"
+        "path": "/quick-setup",
+        "label": "Quick Setup",
+        "desc": "Get started in under 5 minutes"
       },
       {
-        "path": "/annotations",
-        "label": "Annotations",
-        "desc": "Learn about decorators and annotations"
+        "path": "/core-annotations",
+        "label": "Core Annotations",
+        "desc": "Learn about @CrudX and constraint annotations"
       },
       {
-        "path": "/entities",
-        "label": "Entities",
-        "desc": "Working with data models"
+        "path": "/base-entities",
+        "label": "Base Entities",
+        "desc": "Working with MySQL, PostgreSQL, and MongoDB"
       },
       {
         "path": "/rest-endpoints",
         "label": "REST Endpoints",
-        "desc": "Building RESTful APIs"
+        "desc": "Explore 11 auto-generated endpoints"
       }
     ]
   },
   "pagination": {
-    "next": { "title": "Getting Started", "path": "/getting-started" }
+    "next": { "title": "Quick Setup", "path": "/quick-setup" }
   },
   "toc": [
     { "id": "overview", "title": "Introduction", "level": 2 },

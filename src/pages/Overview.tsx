@@ -29,7 +29,6 @@ import TOC from "../components/TOC";
 import overviewData from "../data/overview.json";
 import CodeBlock from "../components/CodeBlock";
 
-// Map icon names to actual Heroicon components
 const iconMap: Record<string, ComponentType<SVGProps<SVGSVGElement>>> = {
   BoltIcon,
   ShieldCheckIcon,
@@ -66,7 +65,7 @@ export default function Overview() {
       <div className="flex-1 min-w-0">
         <section id="overview">
           <Breadcrumbs items={breadcrumbs} className="mb-6" />
-          {/* Hero Section */}
+          
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -83,14 +82,16 @@ export default function Overview() {
             <p className="hero-subtitle max-w-3xl">{hero.subtitle}</p>
             <div className="flex flex-wrap gap-4 mt-8">
               <Link
-                to="/getting-started"
+                to="/quick-setup"
                 className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:opacity-90 focus-ring transition-opacity"
               >
                 {hero.buttons.getStarted}
                 <ArrowRightIcon className="w-4 h-4" />
               </Link>
               <a
-                href="https://github.com"
+                href="https://github.com/sachinnimbal/crudx-framework"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-6 py-3 border border-border rounded-lg font-medium hover:bg-accent focus-ring transition-colors"
               >
                 {hero.buttons.viewOnGithub}
@@ -98,7 +99,7 @@ export default function Overview() {
             </div>
           </motion.div>
         </section>
-        {/* Key Features */}
+
         <section id="key-features" className="mb-12">
           <h2 className="text-[clamp(1.5rem,3vw+0.5rem,2.25rem)] font-semibold tracking-tight mb-6">
             {features.title}
@@ -127,63 +128,40 @@ export default function Overview() {
           </div>
         </section>
 
-        {/* Quick Example */}
         <section id="quick-example" className="prose mb-12">
           <h2>{quickExample.title}</h2>
           <p>{quickExample.intro}</p>
           <div className="not-prose">
             <CodeBlock
-              code={`
-                package com.crudx.examples.controller;
-
-import io.github.sachinnimbal.crudx.core.dto.annotations.CrudXField;
-import io.github.sachinnimbal.crudx.core.dto.annotations.CrudXRequest;
-import io.github.sachinnimbal.crudx.core.dto.annotations.CrudXResponse;
-import io.github.sachinnimbal.crudx.core.model.CrudXMongoEntity;
-import io.github.sachinnimbal.crudx.web.CrudXController;
-import lombok.Data;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import static io.github.sachinnimbal.crudx.core.enums.CrudXOperation.*;
+              code={`import io.github.sachinnimbal.crudx.controller.CrudXController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/students")
-public class StudentController extends CrudXController<StudentController.Student, String> {
-    @Document("students")
-    @Data
-    public static class Student extends CrudXMongoEntity<String> {
-        private String studentId, firstName, lastName, email, department;
-        private Double gpa;
-    }
-
-    @Data
-    @CrudXRequest(value = Student.class, operations = {CREATE, UPDATE})
-    public static class StudentRequest {
-        @CrudXField(required = true)
-        private String firstName, lastName, email, department;
-        private Double gpa;
-    }
-
-    @Data
-    @CrudXResponse(value = Student.class, operations = {GET_ID, GET_ALL})
-    public static class StudentResponse {
-        private String studentId, firstName, lastName, email, department;
-        private Double gpa;
-    }
-}
-   `}
-             language="java"
-             showLineNumbers={false}
+@RequestMapping("/api/employees")
+public class EmployeeController extends CrudXController<Employee, Long> {
+    // That's it! 11 REST endpoints are auto-generated:
+    // POST   /api/employees          - Create single
+    // POST   /api/employees/batch    - Create batch
+    // GET    /api/employees          - Get all
+    // GET    /api/employees/paged    - Get paginated
+    // GET    /api/employees/{id}     - Get by ID
+    // PATCH  /api/employees/{id}     - Partial update
+    // DELETE /api/employees/{id}     - Delete by ID
+    // DELETE /api/employees/batch    - Delete batch
+    // GET    /api/employees/count    - Count all
+    // GET    /api/employees/exists/{id} - Check existence
+    
+    // Add custom endpoints or lifecycle hooks here (optional)
+}`}
+              language="java"
+              showLineNumbers={false}
             />
           </div>
-          <Alert title={quickExample.alert.title} className="my-6">
+          <Alert variant={quickExample.alert.variant as "success"} title={quickExample.alert.title} className="my-6">
             {quickExample.alert.text}
           </Alert>
         </section>
 
-        {/* Next Steps */}
         <section id="next-steps" className="prose mb-12">
           <h2>{nextSteps.title}</h2>
           <p>{nextSteps.intro}</p>
@@ -199,7 +177,6 @@ public class StudentController extends CrudXController<StudentController.Student
         <Pagination next={pagination.next} />
       </div>
 
-      {/* Right Sidebar - TOC */}
       <aside className="hidden xl:block w-64 flex-shrink-0">
         <div className="sticky top-24">
           <TOC items={toc} />
