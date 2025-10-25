@@ -1,0 +1,122 @@
+{
+  "breadcrumbs": [{ "label": "Overview" }],
+  "version": "v1.0.1",
+  "hero": {
+    "title": "Welcome to",
+    "highlight": "CrudX Framework",
+    "subtitle": "CrudX is a powerful Spring Boot framework that automatically generates production-ready REST APIs with zero boilerplate code. Built for developers who value rapid development without sacrificing control or customization.",
+    "buttons": {
+      "getStarted": "Quick Start",
+      "viewOnGithub": "View on GitHub"
+    }
+  },
+  "features": {
+    "title": "Key Features",
+    "items": [
+      {
+        "icon": "RocketLaunchIcon",
+        "title": "Zero Boilerplate",
+        "description": "Eliminates 90% of repetitive CRUD code. Write entities and controllers — that's it!"
+      },
+      {
+        "icon": "CircleStackIcon",
+        "title": "Multi-Database",
+        "description": "MySQL, PostgreSQL, and MongoDB support out of the box with auto-configuration."
+      },
+      {
+        "icon": "ChartBarIcon",
+        "title": "Performance Analytics",
+        "description": "Built-in real-time monitoring with response times, memory tracking, and endpoint stats."
+      },
+      {
+        "icon": "RectangleStackIcon",
+        "title": "Batch Operations",
+        "description": "Bulk create/delete with skip-on-duplicate support and comprehensive tracking."
+      },
+      {
+        "icon": "LockClosedIcon",
+        "title": "Smart Constraints",
+        "description": "Single or multi-field uniqueness with @CrudXUniqueConstraint(s)."
+      },
+      {
+        "icon": "ListBulletIcon",
+        "title": "Auto-Pagination",
+        "description": "Automatically switches to pagination for datasets over 1000 records."
+      },
+      {
+        "icon": "ArrowPathIcon",
+        "title": "Lifecycle Hooks",
+        "description": "beforeCreate, afterUpdate, and other hooks for custom business logic."
+      },
+      {
+        "icon": "CpuChipIcon",
+        "title": "Memory Optimized",
+        "description": "Cursor-based streaming for large datasets prevents OutOfMemory errors."
+      },
+      {
+        "icon": "ExclamationTriangleIcon",
+        "title": "Exception Handling",
+        "description": "Built-in error handling with meaningful messages and proper HTTP status codes."
+      },
+      {
+        "icon": "BanknotesIcon",
+        "title": "Transaction Support",
+        "description": "Automatic transaction management with rollback on errors."
+      },
+      {
+        "icon": "GlobeAltIcon",
+        "title": "RESTful APIs",
+        "description": "10+ auto-generated REST endpoints following industry best practices."
+      },
+      {
+        "icon": "BookOpenIcon",
+        "title": "In-Built Swagger UI",
+        "description": "Integrated Swagger UI for instant API testing — no setup needed."
+      }
+    ]
+  },
+  "quickExample": {
+    "title": "Quick Example",
+    "intro": "Here's a simple example to get you started:",
+    "alert": {
+      "variant": "success",
+      "title": "Pro Tip",
+      "text": "Use our CLI tool to scaffold a new project with best practices and recommended configurations built-in."
+    }
+  },
+  "nextSteps": {
+    "title": "Next Steps",
+    "intro": "Ready to dive deeper? Here are some resources to explore:",
+    "links": [
+      {
+        "path": "/getting-started",
+        "label": "Getting Started",
+        "desc": "Installation and setup guide"
+      },
+      {
+        "path": "/annotations",
+        "label": "Annotations",
+        "desc": "Learn about decorators and annotations"
+      },
+      {
+        "path": "/entities",
+        "label": "Entities",
+        "desc": "Working with data models"
+      },
+      {
+        "path": "/rest-endpoints",
+        "label": "REST Endpoints",
+        "desc": "Building RESTful APIs"
+      }
+    ]
+  },
+  "pagination": {
+    "next": { "title": "Getting Started", "path": "/getting-started" }
+  },
+  "toc": [
+    { "id": "overview", "title": "Introduction", "level": 2 },
+    { "id": "key-features", "title": "Key Features", "level": 2 },
+    { "id": "quick-example", "title": "Quick Example", "level": 2 },
+    { "id": "next-steps", "title": "Next Steps", "level": 2 }
+  ]
+}

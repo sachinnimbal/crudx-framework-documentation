@@ -1,0 +1,74 @@
+[
+  {
+    "method": "GET",
+    "path": "/api/users",
+    "description": "Retrieve all users",
+    "example": {
+      "curl": "curl -X GET https://api.example.com/api/users \\\n  -H \"Content-Type: application/json\"",
+      "response": "{\n  \"data\": [\n    {\n      \"id\": 1,\n      \"name\": \"John Doe\",\n      \"email\": \"john@example.com\"\n    },\n    {\n      \"id\": 2,\n      \"name\": \"Jane Smith\",\n      \"email\": \"jane@example.com\"\n    }\n  ],\n  \"total\": 2\n}"
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/api/users/:id",
+    "description": "Retrieve a specific user by ID",
+    "example": {
+      "curl": "curl -X GET https://api.example.com/api/users/1 \\\n  -H \"Content-Type: application/json\"",
+      "response": "{\n  \"data\": {\n    \"id\": 1,\n    \"name\": \"John Doe\",\n    \"email\": \"john@example.com\",\n    \"createdAt\": \"2024-01-15T10:30:00Z\"\n  }\n}"
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/api/users",
+    "description": "Create a new user",
+    "example": {
+      "curl": "curl -X POST https://api.example.com/api/users \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"name\": \"Alice Johnson\",\n    \"email\": \"alice@example.com\"\n  }'",
+      "response": "{\n  \"success\": true,\n  \"data\": {\n    \"id\": 3,\n    \"name\": \"Alice Johnson\",\n    \"email\": \"alice@example.com\",\n    \"createdAt\": \"2024-01-15T11:00:00Z\"\n  }\n}"
+    }
+  },
+  {
+    "method": "PUT",
+    "path": "/api/users/:id",
+    "description": "Update an existing user",
+    "example": {
+      "curl": "curl -X PUT https://api.example.com/api/users/1 \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"name\": \"John Updated\",\n    \"email\": \"john.updated@example.com\"\n  }'",
+      "response": "{\n  \"success\": true,\n  \"data\": {\n    \"id\": 1,\n    \"name\": \"John Updated\",\n    \"email\": \"john.updated@example.com\",\n    \"updatedAt\": \"2024-01-15T11:15:00Z\"\n  }\n}"
+    }
+  },
+  {
+    "method": "DELETE",
+    "path": "/api/users/:id",
+    "description": "Delete a user",
+    "example": {
+      "curl": "curl -X DELETE https://api.example.com/api/users/1 \\\n  -H \"Content-Type: application/json\"",
+      "response": "{\n  \"success\": true,\n  \"message\": \"User deleted successfully\"\n}"
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/api/posts",
+    "description": "Retrieve all blog posts",
+    "example": {
+      "curl": "curl -X GET https://api.example.com/api/posts?page=1&limit=10 \\\n  -H \"Content-Type: application/json\"",
+      "response": "{\n  \"data\": [\n    {\n      \"id\": 1,\n      \"title\": \"Getting Started\",\n      \"content\": \"Welcome to our platform...\",\n      \"author\": \"John Doe\",\n      \"createdAt\": \"2024-01-15T09:00:00Z\"\n    }\n  ],\n  \"page\": 1,\n  \"total\": 25\n}"
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/api/posts",
+    "description": "Create a new blog post",
+    "example": {
+      "curl": "curl -X POST https://api.example.com/api/posts \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Authorization: Bearer YOUR_TOKEN\" \\\n  -d '{\n    \"title\": \"My First Post\",\n    \"content\": \"This is the content...\"\n  }'",
+      "response": "{\n  \"success\": true,\n  \"data\": {\n    \"id\": 2,\n    \"title\": \"My First Post\",\n    \"content\": \"This is the content...\",\n    \"createdAt\": \"2024-01-15T12:00:00Z\"\n  }\n}"
+    }
+  },
+  {
+    "method": "PATCH",
+    "path": "/api/posts/:id",
+    "description": "Partially update a blog post",
+    "example": {
+      "curl": "curl -X PATCH https://api.example.com/api/posts/1 \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Authorization: Bearer YOUR_TOKEN\" \\\n  -d '{\n    \"title\": \"Updated Title\"\n  }'",
+      "response": "{\n  \"success\": true,\n  \"data\": {\n    \"id\": 1,\n    \"title\": \"Updated Title\",\n    \"updatedAt\": \"2024-01-15T12:30:00Z\"\n  }\n}"
+    }
+  }
+]

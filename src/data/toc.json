@@ -1,0 +1,32 @@
+{
+  "overview": [
+    { "id": "overview", "title": "Introduction", "level": 2 },
+    { "id": "key-features", "title": "Key Features", "level": 2 },
+    { "id": "quick-example", "title": "Quick Example", "level": 2 },
+    { "id": "next-steps", "title": "Next Steps", "level": 2 }
+  ],
+  "getting-started": [
+    { "id": "prerequisites", "title": "Prerequisites", "level": 2 },
+    { "id": "installation", "title": "Installation", "level": 2 },
+    { "id": "project-setup", "title": "Project Setup", "level": 2 },
+    { "id": "running", "title": "Running Your App", "level": 2 }
+  ],
+  "annotations": [
+    { "id": "what-are-annotations", "title": "What are Annotations?", "level": 2 },
+    { "id": "controller-annotations", "title": "Controller Annotations", "level": 2 },
+    { "id": "route-annotations", "title": "Route Annotations", "level": 2 },
+    { "id": "parameter-annotations", "title": "Parameter Annotations", "level": 2 }
+  ],
+  "entities": [
+    { "id": "introduction", "title": "Introduction", "level": 2 },
+    { "id": "defining-entities", "title": "Defining Entities", "level": 2 },
+    { "id": "entity-decorators", "title": "Entity Decorators", "level": 2 },
+    { "id": "relationships", "title": "Relationships", "level": 2 }
+  ],
+  "rest-endpoints": [
+    { "id": "introduction", "title": "Introduction", "level": 2 },
+    { "id": "http-methods", "title": "HTTP Methods", "level": 2 },
+    { "id": "available-endpoints", "title": "Available Endpoints", "level": 2 },
+    { "id": "authentication", "title": "Authentication", "level": 2 }
+  ]
+}
