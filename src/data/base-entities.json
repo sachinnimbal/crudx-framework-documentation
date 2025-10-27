@@ -1,0 +1,136 @@
+{
+  "page": {
+    "title": "Base Entity Classes",
+    "description": "Choose the right base class for your database to get started quickly.",
+    "breadcrumbs": [
+      {
+        "label": "Core Concepts",
+        "path": "/overview"
+      },
+      {
+        "label": "Base Entities"
+      }
+    ]
+  },
+  "tableOfContents": [
+    {
+      "id": "mysql-entity",
+      "title": "CrudXMySQLEntity",
+      "level": 2
+    },
+    {
+      "id": "postgresql-entity",
+      "title": "CrudXPostgreSQLEntity",
+      "level": 2
+    },
+    {
+      "id": "mongo-entity",
+      "title": "CrudXMongoEntity",
+      "level": 2
+    }
+  ],
+  "sections": [
+    {
+      "id": "mysql-entity",
+      "title": "CrudXMySQLEntity<ID>",
+      "version": "v1.0+",
+      "description": "Base class for MySQL entities with auto-increment ID generation.",
+      "target": "Entity Classes",
+      "metadata": {
+        "idStrategy": "GenerationType.IDENTITY",
+        "useFor": "MySQL, MariaDB"
+      },
+      "example": {
+        "code": "@Entity\n@Table(name = \"employees\")\npublic class Employee extends CrudXMySQLEntity<Long> {\n    @Column(nullable = false)\n    private String name;\n    \n    @Column(unique = true)\n    private String email;\n    \n    private String department;\n    private BigDecimal salary;\n}",
+        "language": "java"
+      },
+      "alert": {
+        "variant": "info",
+        "title": "What's Included",
+        "content": "The base class automatically provides: id (primary key), createdAt, updatedAt, createdBy, updatedBy fields with proper JPA annotations."
+      }
+    },
+    {
+      "id": "postgresql-entity",
+      "title": "CrudXPostgreSQLEntity<ID>",
+      "version": "v1.0+",
+      "description": "Base class for PostgreSQL entities with sequence-based ID generation.",
+      "target": "Entity Classes",
+      "metadata": {
+        "idStrategy": "GenerationType.SEQUENCE",
+        "useFor": "PostgreSQL"
+      },
+      "example": {
+        "code": "@Entity\n@Table(name = \"products\")\npublic class Product extends CrudXPostgreSQLEntity<Long> {\n    private String name;\n    private String sku;\n    private BigDecimal price;\n    private Integer stock;\n}",
+        "language": "java"
+      },
+      "alert": {
+        "variant": "success",
+        "title": "Performance Optimized",
+        "content": "PostgreSQL sequences provide better performance for concurrent inserts compared to auto-increment, especially in high-throughput scenarios."
+      }
+    },
+    {
+      "id": "mongo-entity",
+      "title": "CrudXMongoEntity<ID>",
+      "version": "v1.0+",
+      "description": "Base class for MongoDB documents with flexible schema.",
+      "target": "Document Classes",
+      "metadata": {
+        "idType": "String (ObjectId)",
+        "useFor": "MongoDB",
+        "schema": "Flexible/Dynamic"
+      },
+      "example": {
+        "code": "@Document(collection = \"users\")\npublic class User extends CrudXMongoEntity<String> {\n    private String username;\n    private String email;\n    private List<String> roles;\n    private Map<String, Object> metadata;\n}",
+        "language": "java"
+      },
+      "alert": {
+        "variant": "info",
+        "title": "NoSQL Flexibility",
+        "content": "MongoDB entities support dynamic fields and nested documents. You can store complex data structures without rigid schema constraints."
+      },
+      "commonFields": {
+        "title": "Common Fields (All Base Classes)",
+        "description": "All base entity classes provide these fields automatically:",
+        "fields": [
+          {
+            "name": "id",
+            "type": "ID (generic)",
+            "description": "Primary key"
+          },
+          {
+            "name": "createdAt",
+            "type": "LocalDateTime",
+            "description": "Timestamp when entity was created"
+          },
+          {
+            "name": "updatedAt",
+            "type": "LocalDateTime",
+            "description": "Timestamp when entity was last updated"
+          },
+          {
+            "name": "createdBy",
+            "type": "String",
+            "description": "User who created the entity"
+          },
+          {
+            "name": "updatedBy",
+            "type": "String",
+            "description": "User who last updated the entity"
+          }
+        ]
+      }
+    }
+  ],
+  "pagination": {
+    "previous": {
+      "title": "Core Annotations",
+      "path": "/core-annotations"
+    },
+    "next": {
+      "title": "REST Endpoints",
+      "path": "/rest-endpoints"
+    }
+  }
+}

@@ -1,21 +1,19 @@
-import { useState, useEffect } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
-import Header from './components/Header';
-import Sidebar from './components/Sidebar';
-import MobileDrawer from './components/MobileDrawer';
-import Footer from './components/Footer';
-import Overview from './pages/Overview';
-import QuickSetup from './pages/QuickSetup';
-import CoreAnnotations from './pages/CoreAnnotations';
-import BaseEntities from './pages/BaseEntities';
-import RestEndpoints from './pages/RestEndpoints';
-import { useTheme } from './hooks/useTheme';
+import { useState, useEffect } from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import Header from "./components/Header";
+import Sidebar from "./components/Sidebar";
+import MobileDrawer from "./components/MobileDrawer";
+import Footer from "./components/Footer";
+import Overview from "./pages/Overview";
+import QuickSetup from "./pages/QuickSetup";
+import BaseEntities from "./pages/BaseEntities";
+import RestEndpoints from "./pages/RestEndpoints";
+import Annotations from "./pages/Annotations";
 
 function App() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const { theme } = useTheme();
 
   // Close mobile menu on route change
   useEffect(() => {
@@ -26,19 +24,19 @@ function App() {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       // Cmd/Ctrl + K for search
-      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
         e.preventDefault();
         setIsSearchOpen(true);
       }
       // Escape to close drawers
-      if (e.key === 'Escape') {
+      if (e.key === "Escape") {
         setIsMobileMenuOpen(false);
         setIsSearchOpen(false);
       }
     };
 
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
   return (
@@ -75,7 +73,7 @@ function App() {
                 <Route path="/" element={<Navigate to="/overview" replace />} />
                 <Route path="/overview" element={<Overview />} />
                 <Route path="/quick-setup" element={<QuickSetup />} />
-                <Route path="/core-annotations" element={<CoreAnnotations />} />
+                <Route path="/annotations" element={<Annotations />} />
                 <Route path="/base-entities" element={<BaseEntities />} />
                 <Route path="/rest-endpoints" element={<RestEndpoints />} />
               </Routes>

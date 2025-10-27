@@ -1,8 +1,8 @@
-import { useState, useEffect, useRef } from 'react';
-import { MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/24/outline';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
-import { cn } from '../utils/cn';
+import { useState, useEffect, useRef } from "react";
+import { MagnifyingGlassIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { motion, AnimatePresence } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+import { cn } from "../utils/cn";
 
 interface SearchResult {
   title: string;
@@ -12,11 +12,32 @@ interface SearchResult {
 
 // Updated search data for CrudX
 const searchData: SearchResult[] = [
-  { title: 'Overview', path: '/overview', excerpt: 'Introduction to CrudX Framework and key features' },
-  { title: 'Quick Setup', path: '/quick-setup', excerpt: 'Get started in 5 minutes with step-by-step guide' },
-  { title: 'Core Annotations', path: '/core-annotations', excerpt: '@CrudX, @CrudXUniqueConstraint, @CrudXImmutable' },
-  { title: 'Base Entities', path: '/base-entities', excerpt: 'MySQL, PostgreSQL, and MongoDB entity classes' },
-  { title: 'REST Endpoints', path: '/rest-endpoints', excerpt: '11 auto-generated REST API endpoints' },
+  {
+    title: "Overview",
+    path: "/overview",
+    excerpt: "Introduction to CrudX Framework and key features",
+  },
+  {
+    title: "Quick Setup",
+    path: "/quick-setup",
+    excerpt: "Get started in 5 minutes with step-by-step guide",
+  },
+  {
+    title: "Core Annotations & DTOs",
+    path: "/annotations",
+    excerpt:
+      "@CrudX, @CrudXUniqueConstraint, @CrudXImmutable, @CrudXResponse, @CrudXRequest, @CrudXField, @CrudXNested",
+  },
+  {
+    title: "Base Entities",
+    path: "/base-entities",
+    excerpt: "MySQL, PostgreSQL, and MongoDB entity classes",
+  },
+  {
+    title: "REST Endpoints",
+    path: "/rest-endpoints",
+    excerpt: "11 auto-generated REST API endpoints",
+  },
 ];
 
 interface SearchBoxProps {
@@ -25,7 +46,7 @@ interface SearchBoxProps {
 }
 
 export default function SearchBox({ isOpen, onClose }: SearchBoxProps) {
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
   const [results, setResults] = useState<SearchResult[]>([]);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -52,23 +73,23 @@ export default function SearchBox({ isOpen, onClose }: SearchBoxProps) {
   }, [query]);
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'ArrowDown') {
+    if (e.key === "ArrowDown") {
       e.preventDefault();
       setSelectedIndex((prev) => (prev + 1) % results.length);
-    } else if (e.key === 'ArrowUp') {
+    } else if (e.key === "ArrowUp") {
       e.preventDefault();
       setSelectedIndex((prev) => (prev - 1 + results.length) % results.length);
-    } else if (e.key === 'Enter' && results[selectedIndex]) {
+    } else if (e.key === "Enter" && results[selectedIndex]) {
       navigate(results[selectedIndex].path);
       onClose();
-      setQuery('');
+      setQuery("");
     }
   };
 
   const handleSelect = (path: string) => {
     navigate(path);
     onClose();
-    setQuery('');
+    setQuery("");
   };
 
   if (!isOpen) return null;
@@ -128,12 +149,16 @@ export default function SearchBox({ isOpen, onClose }: SearchBoxProps) {
                     key={result.path}
                     onClick={() => handleSelect(result.path)}
                     className={cn(
-                      'w-full text-left px-4 py-3 hover:bg-accent transition-colors',
-                      index === selectedIndex && 'bg-accent'
+                      "w-full text-left px-4 py-3 hover:bg-accent transition-colors",
+                      index === selectedIndex && "bg-accent"
                     )}
                   >
-                    <div className="font-medium text-sm mb-1">{result.title}</div>
-                    <div className="text-xs text-muted-foreground">{result.excerpt}</div>
+                    <div className="font-medium text-sm mb-1">
+                      {result.title}
+                    </div>
+                    <div className="text-xs text-muted-foreground">
+                      {result.excerpt}
+                    </div>
                   </button>
                 ))}
               </motion.div>
@@ -151,16 +176,24 @@ export default function SearchBox({ isOpen, onClose }: SearchBoxProps) {
           {!query && (
             <div className="px-4 py-3 text-xs text-muted-foreground border-t border-border flex items-center gap-4">
               <div className="flex items-center gap-1">
-                <kbd className="px-1.5 py-0.5 text-xs font-mono bg-muted rounded">↑</kbd>
-                <kbd className="px-1.5 py-0.5 text-xs font-mono bg-muted rounded">↓</kbd>
+                <kbd className="px-1.5 py-0.5 text-xs font-mono bg-muted rounded">
+                  ↑
+                </kbd>
+                <kbd className="px-1.5 py-0.5 text-xs font-mono bg-muted rounded">
+                  ↓
+                </kbd>
                 <span>to navigate</span>
               </div>
               <div className="flex items-center gap-1">
-                <kbd className="px-1.5 py-0.5 text-xs font-mono bg-muted rounded">↵</kbd>
+                <kbd className="px-1.5 py-0.5 text-xs font-mono bg-muted rounded">
+                  ↵
+                </kbd>
                 <span>to select</span>
               </div>
               <div className="flex items-center gap-1">
-                <kbd className="px-1.5 py-0.5 text-xs font-mono bg-muted rounded">esc</kbd>
+                <kbd className="px-1.5 py-0.5 text-xs font-mono bg-muted rounded">
+                  esc
+                </kbd>
                 <span>to close</span>
               </div>
             </div>

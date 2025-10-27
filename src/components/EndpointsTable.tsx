@@ -1,15 +1,21 @@
-import { useState } from 'react';
-import { ChevronDownIcon, ChevronRightIcon, ClipboardDocumentIcon, CheckIcon } from '@heroicons/react/24/outline';
-import { motion, AnimatePresence } from 'framer-motion';
-import Badge from './Badge';
-import CodeBlock from './CodeBlock';
-import { copyToClipboard, showToast } from '../utils/clipboard';
-import { cn } from '../utils/cn';
+import { useState } from "react";
+import {
+  ChevronDownIcon,
+  ChevronRightIcon,
+  ClipboardDocumentIcon,
+  CheckIcon,
+} from "@heroicons/react/24/outline";
+import { motion, AnimatePresence } from "framer-motion";
+import Badge from "./Badge";
+import CodeBlock from "./CodeBlock";
+import { copyToClipboard, showToast } from "../utils/clipboard";
+import { cn } from "../utils/cn";
 
 interface Endpoint {
   method: string;
   path: string;
   description: string;
+  badge?: string;
   example?: {
     curl: string;
     response: string;
@@ -21,15 +27,18 @@ interface EndpointsTableProps {
   className?: string;
 }
 
-const methodColors: Record<string, 'success' | 'info' | 'warning' | 'error'> = {
-  GET: 'success',
-  POST: 'info',
-  PUT: 'warning',
-  DELETE: 'error',
-  PATCH: 'info',
+const methodColors: Record<string, "success" | "info" | "warning" | "error"> = {
+  GET: "success",
+  POST: "info",
+  PUT: "warning",
+  DELETE: "error",
+  PATCH: "info",
 };
 
-export default function EndpointsTable({ endpoints, className }: EndpointsTableProps) {
+export default function EndpointsTable({
+  endpoints,
+  className,
+}: EndpointsTableProps) {
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
 
@@ -37,13 +46,18 @@ export default function EndpointsTable({ endpoints, className }: EndpointsTableP
     const success = await copyToClipboard(curl);
     if (success) {
       setCopiedIndex(index);
-      showToast('cURL copied');
+      showToast("cURL copied");
       setTimeout(() => setCopiedIndex(null), 2000);
     }
   };
 
   return (
-    <div className={cn('border border-border rounded-lg overflow-hidden', className)}>
+    <div
+      className={cn(
+        "border border-border rounded-lg overflow-hidden",
+        className
+      )}
+    >
       <div className="overflow-x-auto">
         <table className="w-full">
           <thead className="bg-muted/50 border-b border-border">
@@ -66,15 +80,22 @@ export default function EndpointsTable({ endpoints, className }: EndpointsTableP
           <tbody className="divide-y divide-border">
             {endpoints.map((endpoint, index) => (
               <>
-                <tr key={index} className="hover:bg-accent/30 transition-colors">
+                <tr
+                  key={index}
+                  className="hover:bg-accent/30 transition-colors"
+                >
                   <td className="px-4 py-3">
                     {endpoint.example && (
                       <button
                         onClick={() =>
-                          setExpandedIndex(expandedIndex === index ? null : index)
+                          setExpandedIndex(
+                            expandedIndex === index ? null : index
+                          )
                         }
                         className="p-1 hover:bg-accent rounded focus-ring"
-                        aria-label={expandedIndex === index ? 'Collapse' : 'Expand'}
+                        aria-label={
+                          expandedIndex === index ? "Collapse" : "Expand"
+                        }
                       >
                         {expandedIndex === index ? (
                           <ChevronDownIcon className="w-4 h-4" />
@@ -85,12 +106,17 @@ export default function EndpointsTable({ endpoints, className }: EndpointsTableP
                     )}
                   </td>
                   <td className="px-4 py-3">
-                    <Badge variant={methodColors[endpoint.method] || 'default'}>
+                    <Badge variant={methodColors[endpoint.method] || "default"}>
                       {endpoint.method}
                     </Badge>
                   </td>
                   <td className="px-4 py-3">
-                    <code className="text-sm font-mono">{endpoint.path}</code>
+                    <div className="flex items-center gap-2">
+                      <code className="text-sm font-mono">{endpoint.path}</code>
+                      {endpoint.badge && (
+                        <Badge variant="success">{endpoint.badge}</Badge>
+                      )}
+                    </div>
                   </td>
                   <td className="px-4 py-3 text-sm text-muted-foreground">
                     {endpoint.description}
@@ -98,7 +124,9 @@ export default function EndpointsTable({ endpoints, className }: EndpointsTableP
                   <td className="px-4 py-3">
                     {endpoint.example && (
                       <button
-                        onClick={() => handleCopyCurl(endpoint.example!.curl, index)}
+                        onClick={() =>
+                          handleCopyCurl(endpoint.example!.curl, index)
+                        }
                         className="inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors focus-ring rounded px-2 py-1"
                       >
                         {copiedIndex === index ? (
@@ -122,14 +150,16 @@ export default function EndpointsTable({ endpoints, className }: EndpointsTableP
                       <td colSpan={5} className="p-0">
                         <motion.div
                           initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: 'auto', opacity: 1 }}
+                          animate={{ height: "auto", opacity: 1 }}
                           exit={{ height: 0, opacity: 0 }}
                           transition={{ duration: 0.2 }}
                           className="overflow-hidden"
                         >
                           <div className="p-4 bg-muted/20 space-y-4">
                             <div>
-                              <h4 className="text-sm font-semibold mb-2">Request</h4>
+                              <h4 className="text-sm font-semibold mb-2">
+                                Request
+                              </h4>
                               <CodeBlock
                                 code={endpoint.example.curl}
                                 language="bash"
@@ -137,7 +167,9 @@ export default function EndpointsTable({ endpoints, className }: EndpointsTableP
                               />
                             </div>
                             <div>
-                              <h4 className="text-sm font-semibold mb-2">Response</h4>
+                              <h4 className="text-sm font-semibold mb-2">
+                                Response
+                              </h4>
                               <CodeBlock
                                 code={endpoint.example.response}
                                 language="json"

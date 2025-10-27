@@ -15,7 +15,7 @@ const navigation = [
   {
     title: 'Core Concepts',
     items: [
-      { title: 'Core Annotations', path: '/core-annotations', icon: TagIcon },
+      { title: 'Annotations', path: '/annotations', icon: TagIcon },
       { title: 'Base Entities', path: '/base-entities', icon: CircleStackIcon },
       { title: 'REST Endpoints', path: '/rest-endpoints', icon: BoltIcon },
     ],

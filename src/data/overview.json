@@ -1,10 +1,10 @@
 {
   "breadcrumbs": [{ "label": "Overview" }],
-  "version": "v1.0.1",
+  "version": "Version 1.0.1",
   "hero": {
     "title": "Spring Boot",
     "highlight": "CrudX Framework",
-    "subtitle": "Complete API Documentation - CrudX is a powerful Spring Boot framework that automatically generates production-ready REST APIs with zero boilerplate code. Built for developers who value rapid development without sacrificing control or customization.",
+    "subtitle": "The ultimate boilerplate-free CRUD framework, engineered for speed and efficiency. CrudX supports MySQL, PostgreSQL, and MongoDB out of the box — enabling you to build production-ready REST APIs in minutes. It also lets you enable DTOs selectively for specific endpoints and provides real-time endpoint logging with detailed performance tracking — all with zero boilerplate and full developer control.",
     "buttons": {
       "getStarted": "Quick Setup",
       "viewOnGithub": "View on GitHub"
@@ -16,68 +16,83 @@
       {
         "icon": "RocketLaunchIcon",
         "title": "Zero Boilerplate",
-        "description": "Eliminates 90% of repetitive CRUD code. Write entities and controllers — that's it!"
+        "description": "Skip repetitive CRUD code — just define your entity and go."
       },
       {
         "icon": "CircleStackIcon",
         "title": "Multi-Database",
-        "description": "MySQL, PostgreSQL, and MongoDB support out of the box with auto-configuration."
+        "description": "Supports MySQL, PostgreSQL, and MongoDB out of the box."
       },
       {
         "icon": "ChartBarIcon",
         "title": "Performance Analytics",
-        "description": "Built-in real-time monitoring with response times, memory tracking, and endpoint stats."
+        "description": "Real-time stats for response time, memory, and endpoints."
       },
       {
         "icon": "RectangleStackIcon",
         "title": "Batch Operations",
-        "description": "Bulk create/delete with skip-on-duplicate support. Max 100,000 records per request."
+        "description": "Handle up to 100K records with smart bulk operations."
       },
       {
         "icon": "LockClosedIcon",
         "title": "Smart Constraints",
-        "description": "Single or multi-field uniqueness with @CrudXUniqueConstraint(s)."
+        "description": "Supports single or multi-field unique constraints."
       },
       {
         "icon": "ListBulletIcon",
         "title": "Auto-Pagination",
-        "description": "Automatically switches to pagination for datasets over 1000 records."
+        "description": "Automatically paginates large datasets."
       },
       {
         "icon": "ArrowPathIcon",
         "title": "Lifecycle Hooks",
-        "description": "beforeCreate, afterUpdate, and other hooks for custom business logic."
+        "description": "Custom logic via beforeCreate, afterUpdate, etc."
       },
       {
         "icon": "CpuChipIcon",
         "title": "Memory Optimized",
-        "description": "Intelligent 500-record chunking for large datasets prevents OutOfMemory errors."
+        "description": "Chunk-based handling to avoid OutOfMemory errors."
       },
       {
         "icon": "ExclamationTriangleIcon",
         "title": "Exception Handling",
-        "description": "Built-in error handling with meaningful messages and proper HTTP status codes."
+        "description": "Built-in error responses with clear messages."
       },
       {
         "icon": "BanknotesIcon",
         "title": "Immutable Fields",
-        "description": "@CrudXImmutable annotation protects fields from updates after creation."
+        "description": "Protect fields from being updated post-creation."
       },
       {
         "icon": "GlobeAltIcon",
         "title": "RESTful APIs",
-        "description": "11 auto-generated REST endpoints following industry best practices."
+        "description": "11 pre-built endpoints following REST standards."
       },
       {
         "icon": "BookOpenIcon",
-        "title": "In-Built Swagger UI",
-        "description": "Integrated Swagger UI for instant API testing — no setup needed."
+        "title": "Swagger UI",
+        "description": "Instant API testing with built-in Swagger."
+      },
+      {
+        "icon": "CodeBracketSquareIcon",
+        "title": "DTO Mode",
+        "description": "Enable DTOs for selected endpoints only."
+      },
+      {
+        "icon": "ShieldCheckIcon",
+        "title": "Endpoint Tracking",
+        "description": "Auto-log requests, memory, and response time."
       }
     ]
   },
+
   "quickExample": {
     "title": "Quick Example",
     "intro": "Extend CrudXController - that's it! No additional code needed:",
+    "codeSnippet": {
+      "language": "java",
+      "code": "import io.github.sachinnimbal.crudx.controller.CrudXController;\nimport org.springframework.web.bind.annotation.*;\n\n@RestController\n@RequestMapping(\"/api/employees\")\npublic class EmployeeController extends CrudXController<Employee, Long> {\n    // That's it! 11 REST endpoints are auto-generated:\n    // POST   /api/employees            - Create single\n    // POST   /api/employees/batch      - Create batch\n    // GET    /api/employees            - Get all\n    // GET    /api/employees/paged      - Get paginated\n    // GET    /api/employees/{id}       - Get by ID\n    // PATCH  /api/employees/{id}       - Partial update\n    // DELETE /api/employees/{id}       - Delete by ID\n    // DELETE /api/employees/batch      - Delete batch\n    // GET    /api/employees/count      - Count all\n    // GET    /api/employees/exists/{id} - Check existence\n    \n    // Add custom endpoints or lifecycle hooks here (optional)\n}"
+    },
     "alert": {
       "variant": "success",
       "title": "You're All Set!",
@@ -94,8 +109,8 @@
         "desc": "Get started in under 5 minutes"
       },
       {
-        "path": "/core-annotations",
-        "label": "Core Annotations",
+        "path": "/annotations",
+        "label": "Core Annotations & DTOs",
         "desc": "Learn about @CrudX and constraint annotations"
       },
       {

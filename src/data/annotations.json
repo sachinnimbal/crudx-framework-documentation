@@ -1,0 +1,547 @@
+{
+  "page": {
+    "title": "Core Annotations & DTOs",
+    "description": "Learn the essential annotations for building CrudX applications, including powerful DTO mapping capabilities.",
+    "breadcrumbs": [
+      {
+        "label": "Core Concepts",
+        "path": "/overview"
+      },
+      {
+        "label": "Annotations"
+      }
+    ]
+  },
+  "tableOfContents": [
+    {
+      "id": "crudx-annotation",
+      "title": "@CrudX",
+      "level": 2
+    },
+    {
+      "id": "unique-constraints",
+      "title": "@CrudXUniqueConstraints",
+      "level": 2
+    },
+    {
+      "id": "unique-constraint",
+      "title": "@CrudXUniqueConstraint",
+      "level": 2
+    },
+    {
+      "id": "immutable",
+      "title": "@CrudXImmutable",
+      "level": 2
+    },
+    {
+      "id": "dto-overview",
+      "title": "DTO System Overview",
+      "badge": "New",
+      "level": 2
+    },
+    {
+      "id": "crudx-request",
+      "title": "@CrudXRequest",
+      "badge": "New",
+      "level": 2
+    },
+    {
+      "id": "crudx-response",
+      "title": "@CrudXResponse",
+      "badge": "New",
+      "level": 2
+    },
+    {
+      "id": "crudx-field",
+      "title": "@CrudXField",
+      "badge": "New",
+      "level": 2
+    },
+    {
+      "id": "crudx-nested",
+      "title": "@CrudXNested",
+      "badge": "New",
+      "level": 2
+    }
+  ],
+  "sections": [
+    {
+      "id": "crudx-annotation",
+      "version": "Since v1.0.0",
+      "title": "@CrudX",
+      "description": "Enables CrudX framework functionality in your Spring Boot application.",
+      "target": "Application Class",
+      "example": {
+        "language": "java",
+        "code": "@SpringBootApplication\n@CrudX // 👈 Add this annotation\npublic class MyApplication {\n    public static void main(String[] args) {\n        SpringApplication.run(MyApplication.class, args);\n    }\n}"
+      },
+      "features": [
+        "Automatically scans for CrudX controllers",
+        "Registers service beans for detected entities",
+        "Configures database connections",
+        "Enables auto-repository generation",
+        "Initializes performance monitoring"
+      ]
+    },
+    {
+      "id": "unique-constraints",
+      "badge": {
+        "text": "Core Concept",
+        "variant": "warning"
+      },
+      "version": "Since v1.0.0",
+      "title": "@CrudXUniqueConstraints",
+      "description": "Container annotation for defining multiple unique constraints on an entity.",
+      "attributes": [
+        {
+          "name": "value",
+          "type": "@CrudXUniqueConstraint[]",
+          "required": true,
+          "description": "Array of unique constraint definitions"
+        }
+      ],
+      "example": {
+        "language": "java",
+        "code": "@Entity\n@CrudXUniqueConstraints({\n    @CrudXUniqueConstraint(\n        fields = {\"email\"},\n        message = \"Email already registered\"\n    ),\n    @CrudXUniqueConstraint(\n        fields = {\"username\"},\n        message = \"Username already taken\"\n    ),\n    @CrudXUniqueConstraint(\n        fields = {\"phoneNumber\"},\n        message = \"Phone number already registered\"\n    )\n})\npublic class User extends CrudXMySQLEntity<Long> {\n    private String email;\n    private String username;\n    private String phoneNumber;\n}"
+      },
+      "features": [
+        "Groups multiple unique constraints on a single entity",
+        "Validates each constraint independently during create/update operations",
+        "Returns specific error messages for each violated constraint",
+        "Prevents duplicate entries across multiple field combinations",
+        "Automatically generates database-level unique indexes"
+      ]
+    },
+    {
+      "id": "unique-constraint",
+      "badge": {
+        "text": "Core Concept",
+        "variant": "warning"
+      },
+      "version": "Since v1.0.0",
+      "title": "@CrudXUniqueConstraint",
+      "description": "Defines a unique constraint on one or more fields.",
+      "attributes": [
+        {
+          "name": "fields",
+          "type": "String[]",
+          "required": true,
+          "description": "Field names that must be unique"
+        },
+        {
+          "name": "name",
+          "type": "String",
+          "required": false,
+          "description": "Constraint name (optional)"
+        },
+        {
+          "name": "message",
+          "type": "String",
+          "required": false,
+          "description": "Custom error message"
+        }
+      ],
+      "example": {
+        "language": "java",
+        "code": "@Entity\n@CrudXUniqueConstraint(\n    fields = {\"email\"},\n    message = \"Email address already exists\"\n)\npublic class User extends CrudXMySQLEntity<Long> {\n    private String email;\n}"
+      },
+      "features": [
+        "Enforces uniqueness on specified field(s) at application level",
+        "Validates before insert/update operations to prevent duplicates",
+        "Supports single or composite field uniqueness",
+        "Returns custom error message when constraint is violated",
+        "Creates corresponding database unique index automatically"
+      ]
+    },
+    {
+      "id": "immutable",
+      "badge": {
+        "text": "New Feature",
+        "variant": "success"
+      },
+      "version": "New in v1.0.1",
+      "title": "@CrudXImmutable",
+      "description": "Marks a field as immutable - cannot be updated after entity creation.",
+      "example": {
+        "language": "java",
+        "code": "@Entity\npublic class Employee extends CrudXMySQLEntity<Long> {\n    @CrudXImmutable(message = \"Employee code cannot be changed\")\n    private String employeeCode;\n    \n    @CrudXImmutable(message = \"Hire date is permanent\")\n    private LocalDate hireDate;\n    \n    private String name; // Can be updated\n}"
+      },
+      "alert": {
+        "variant": "info",
+        "title": "Validation Behavior",
+        "content": "Automatically enforced on PATCH operations • Throws IllegalArgumentException if update attempted • Works alongside Bean Validation annotations • Zero configuration required"
+      }
+    },
+    {
+      "id": "dto-overview",
+      "badge": {
+        "text": "DTO System",
+        "variant": "info"
+      },
+      "version": "New in v1.0.2",
+      "title": "DTO System Overview",
+      "description": "CrudX provides a powerful, compile-time DTO mapping system that eliminates boilerplate and ensures type safety.",
+      "features": [
+        "Compile-time code generation - zero runtime reflection overhead",
+        "Automatic field mapping between entities and DTOs",
+        "Support for nested object mapping with @CrudXNested",
+        "Field-level transformations with @CrudXField",
+        "Type conversion for temporal types, enums, and collections",
+        "Operation-specific DTOs (CREATE, UPDATE, GET_ID, etc.)",
+        "Strict mode validation to catch mapping errors at compile time"
+      ],
+      "alert": {
+        "variant": "success",
+        "title": "Performance Optimized",
+        "content": "Generated mappers use method handles for zero-copy field access • Batch operations process 10,000+ entities/second • Zero reflection overhead at runtime • Cached mapping plans for maximum throughput"
+      }
+    },
+    {
+      "id": "crudx-request",
+      "badge": {
+        "text": "DTO Mapping",
+        "variant": "info"
+      },
+      "version": "New in v1.0.2",
+      "title": "@CrudXRequest",
+      "description": "Marks a class as a request DTO for mapping client input to entity objects.",
+      "target": "DTO Class",
+      "attributes": [
+        {
+          "name": "value",
+          "type": "Class<?>",
+          "required": true,
+          "description": "Target entity class to map to"
+        },
+        {
+          "name": "operations",
+          "type": "CrudXOperation[]",
+          "required": false,
+          "default": "[CREATE, BATCH_CREATE, UPDATE, BATCH_UPDATE]",
+          "description": "Operations this DTO is used for"
+        },
+        {
+          "name": "strict",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Enable strict validation - all DTO fields must exist in entity"
+        },
+        {
+          "name": "excludeImmutable",
+          "type": "boolean",
+          "required": false,
+          "default": "true",
+          "description": "Exclude @CrudXImmutable fields from mapping"
+        },
+        {
+          "name": "excludeAudit",
+          "type": "boolean",
+          "required": false,
+          "default": "true",
+          "description": "Exclude audit fields (createdAt, updatedAt, etc.)"
+        }
+      ],
+      "example": {
+        "language": "java",
+        "code": "@CrudXRequest(\n    value = User.class,\n    operations = {CrudXOperation.CREATE},\n    strict = true\n)\npublic class CreateUserRequest {\n    @NotBlank(message = \"Email is required\")\n    @Email\n    private String email;\n    \n    @NotBlank\n    @Size(min = 3, max = 50)\n    private String username;\n    \n    @NotBlank\n    @Size(min = 8)\n    private String password;\n    \n    // Getters and setters\n}"
+      },
+      "features": [
+        "Compile-time mapper generation for type safety",
+        "Automatic field mapping by name",
+        "Support for Bean Validation annotations",
+        "Operation-specific DTOs (different fields for CREATE vs UPDATE)",
+        "Strict mode catches invalid field mappings at compile time",
+        "Excludes immutable and audit fields automatically"
+      ],
+      "alert": {
+        "variant": "warning",
+        "title": "Strict Mode",
+        "content": "When strict=true, compilation fails if any DTO field doesn't map to an entity field • Use this to catch typos and incorrect mappings early • Recommended for production applications"
+      }
+    },
+    {
+      "id": "crudx-response",
+      "badge": {
+        "text": "DTO Mapping",
+        "variant": "info"
+      },
+      "version": "New in v1.0.2",
+      "title": "@CrudXResponse",
+      "description": "Marks a class as a response DTO for mapping entity objects to API responses.",
+      "target": "DTO Class",
+      "attributes": [
+        {
+          "name": "value",
+          "type": "Class<?>",
+          "required": true,
+          "description": "Source entity class to map from"
+        },
+        {
+          "name": "operations",
+          "type": "CrudXOperation[]",
+          "required": false,
+          "default": "[GET_ID, GET_ALL, GET_PAGED]",
+          "description": "Operations this DTO is used for"
+        },
+        {
+          "name": "includeId",
+          "type": "boolean",
+          "required": false,
+          "default": "true",
+          "description": "Include entity ID in response"
+        },
+        {
+          "name": "includeAudit",
+          "type": "boolean",
+          "required": false,
+          "default": "true",
+          "description": "Include audit fields (createdAt, updatedAt)"
+        },
+        {
+          "name": "lazyNested",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Load nested objects lazily (requires proxy support)"
+        }
+      ],
+      "example": {
+        "language": "java",
+        "code": "@CrudXResponse(\n    value = User.class,\n    operations = {CrudXOperation.GET_ID, CrudXOperation.GET_ALL},\n    includeAudit = true\n)\npublic class UserResponse {\n    private Long id;\n    private String email;\n    private String username;\n    private String fullName;\n    \n    @CrudXNested\n    private List<RoleResponse> roles;\n    \n    private LocalDateTime createdAt;\n    private LocalDateTime updatedAt;\n    \n    // Getters and setters\n}"
+      },
+      "features": [
+        "Zero-copy entity-to-DTO transformation",
+        "Batch processing optimized for high throughput",
+        "Nested object mapping with @CrudXNested",
+        "Selective field inclusion/exclusion",
+        "Operation-specific responses (detailed vs summary views)",
+        "Automatic date/time formatting support"
+      ],
+      "alert": {
+        "variant": "info",
+        "title": "Performance Tip",
+        "content": "Response DTOs use cached mapping plans for maximum speed • Batch operations (GET_ALL, GET_PAGED) process 10,000+ entities per second • Consider using separate DTOs for list vs detail views to optimize payload size"
+      }
+    },
+    {
+      "id": "crudx-field",
+      "badge": {
+        "text": "Field Mapping",
+        "variant": "info"
+      },
+      "version": "New in v1.0.2",
+      "title": "@CrudXField",
+      "description": "Provides fine-grained control over individual field mapping behavior.",
+      "target": "DTO Field",
+      "attributes": [
+        {
+          "name": "source",
+          "type": "String",
+          "required": false,
+          "default": "\"\"",
+          "description": "Map to a different entity field name"
+        },
+        {
+          "name": "format",
+          "type": "String",
+          "required": false,
+          "default": "\"\"",
+          "description": "Date/time format pattern (e.g., 'yyyy-MM-dd')"
+        },
+        {
+          "name": "ignore",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Skip this field during mapping"
+        },
+        {
+          "name": "transformer",
+          "type": "String",
+          "required": false,
+          "default": "\"\"",
+          "description": "Apply transformation: toUpperCase, toLowerCase, trim"
+        },
+        {
+          "name": "defaultValue",
+          "type": "String",
+          "required": false,
+          "default": "\"\"",
+          "description": "Default value if source is null (request DTOs only)"
+        },
+        {
+          "name": "required",
+          "type": "boolean",
+          "required": false,
+          "default": "false",
+          "description": "Field must be present (validation hint)"
+        }
+      ],
+      "examples": [
+        {
+          "title": "Field Name Mapping",
+          "language": "java",
+          "code": "@CrudXResponse(User.class)\npublic class UserResponse {\n    // Map DTO 'fullName' to entity 'name' field\n    @CrudXField(source = \"name\")\n    private String fullName;\n}"
+        },
+        {
+          "title": "Date Formatting",
+          "language": "java",
+          "code": "@CrudXResponse(Order.class)\npublic class OrderResponse {\n    @CrudXField(format = \"yyyy-MM-dd HH:mm\")\n    private LocalDateTime orderDate;\n    \n    @CrudXField(format = \"yyyy-MM-dd\")\n    private LocalDate deliveryDate;\n}"
+        },
+        {
+          "title": "String Transformations",
+          "language": "java",
+          "code": "@CrudXRequest(Product.class)\npublic class CreateProductRequest {\n    @CrudXField(transformer = \"toUpperCase\")\n    private String sku;\n    \n    @CrudXField(transformer = \"trim\")\n    private String description;\n}"
+        },
+        {
+          "title": "Default Values",
+          "language": "java",
+          "code": "@CrudXRequest(User.class)\npublic class CreateUserRequest {\n    @CrudXField(defaultValue = \"ACTIVE\")\n    private String status;\n    \n    @CrudXField(defaultValue = \"USER\")\n    private String role;\n}"
+        },
+        {
+          "title": "Ignore Fields",
+          "language": "java",
+          "code": "@CrudXResponse(User.class)\npublic class PublicUserResponse {\n    private String username;\n    \n    @CrudXField(ignore = true)\n    private String password; // Never include in response\n}"
+        }
+      ],
+      "features": [
+        "Map DTO fields to different entity field names",
+        "Format temporal types with custom patterns (ISO-8601, locale-specific)",
+        "Apply transformations: toUpperCase, toLowerCase, trim",
+        "Set default values for optional fields",
+        "Ignore sensitive fields in responses",
+        "Compile-time validation of format patterns"
+      ],
+      "alert": {
+        "variant": "warning",
+        "title": "Format Pattern Validation",
+        "content": "Invalid format patterns are caught at compile time • The annotation processor validates DateTimeFormatter patterns • Fix errors before deployment to prevent runtime exceptions"
+      }
+    },
+    {
+      "id": "crudx-nested",
+      "badge": {
+        "text": "Nested Mapping",
+        "variant": "info"
+      },
+      "version": "New in v1.0.2",
+      "title": "@CrudXNested",
+      "description": "Enables automatic mapping of nested entities and collections to their corresponding DTOs.",
+      "target": "DTO Field (Object or Collection)",
+      "attributes": [
+        {
+          "name": "dtoClass",
+          "type": "Class<?>",
+          "required": false,
+          "default": "void.class",
+          "description": "Explicit DTO class for nested mapping (auto-detected if not specified)"
+        },
+        {
+          "name": "maxDepth",
+          "type": "int",
+          "required": false,
+          "default": "3",
+          "description": "Maximum nesting depth to prevent circular references"
+        },
+        {
+          "name": "fetch",
+          "type": "FetchStrategy",
+          "required": false,
+          "default": "EAGER",
+          "description": "EAGER (load immediately) or LAZY (load on access)"
+        },
+        {
+          "name": "nullStrategy",
+          "type": "NullStrategy",
+          "required": false,
+          "default": "INCLUDE_NULL",
+          "description": "How to handle null values: INCLUDE_NULL, EXCLUDE_NULL, EMPTY_COLLECTION"
+        }
+      ],
+      "enums": [
+        {
+          "name": "FetchStrategy",
+          "values": [
+            {
+              "name": "EAGER",
+              "description": "Load nested objects immediately"
+            },
+            {
+              "name": "LAZY",
+              "description": "Load nested objects on access (requires proxy support)"
+            }
+          ]
+        },
+        {
+          "name": "NullStrategy",
+          "values": [
+            {
+              "name": "INCLUDE_NULL",
+              "description": "Keep null fields in response"
+            },
+            {
+              "name": "EXCLUDE_NULL",
+              "description": "Remove field from response if null"
+            },
+            {
+              "name": "EMPTY_COLLECTION",
+              "description": "Return empty list/set for null collections"
+            }
+          ]
+        }
+      ],
+      "examples": [
+        {
+          "title": "Basic Nested Mapping",
+          "language": "java",
+          "code": "@CrudXResponse(Order.class)\npublic class OrderResponse {\n    private Long id;\n    \n    @CrudXNested\n    private CustomerResponse customer;\n    \n    @CrudXNested\n    private List<OrderItemResponse> items;\n}"
+        },
+        {
+          "title": "Explicit DTO Class",
+          "language": "java",
+          "code": "@CrudXResponse(User.class)\npublic class UserDetailResponse {\n    private String username;\n    \n    // Use specific DTO for nested mapping\n    @CrudXNested(dtoClass = RoleResponse.class)\n    private List<Role> roles;\n}"
+        },
+        {
+          "title": "Depth Control",
+          "language": "java",
+          "code": "@CrudXResponse(Category.class)\npublic class CategoryResponse {\n    private String name;\n    \n    // Prevent infinite recursion in tree structures\n    @CrudXNested(maxDepth = 2)\n    private CategoryResponse parent;\n    \n    @CrudXNested(maxDepth = 1)\n    private List<CategoryResponse> children;\n}"
+        },
+        {
+          "title": "Null Handling",
+          "language": "java",
+          "code": "@CrudXResponse(Post.class)\npublic class PostResponse {\n    private String title;\n    \n    // Exclude author field if null\n    @CrudXNested(nullStrategy = NullStrategy.EXCLUDE_NULL)\n    private UserResponse author;\n    \n    // Return empty list instead of null\n    @CrudXNested(nullStrategy = NullStrategy.EMPTY_COLLECTION)\n    private List<CommentResponse> comments;\n}"
+        },
+        {
+          "title": "Complex Nested Structure",
+          "language": "java",
+          "code": "@CrudXResponse(Order.class)\npublic class OrderDetailResponse {\n    private Long id;\n    private String orderNumber;\n    \n    @CrudXNested(dtoClass = CustomerSummaryResponse.class)\n    private Customer customer;\n    \n    @CrudXNested(\n        dtoClass = OrderItemDetailResponse.class,\n        nullStrategy = NullStrategy.EMPTY_COLLECTION\n    )\n    private List<OrderItem> items;\n    \n    @CrudXNested(maxDepth = 1)\n    private ShippingAddressResponse shippingAddress;\n}"
+        }
+      ],
+      "features": [
+        "Automatic nested object and collection mapping",
+        "Circular reference protection with configurable depth limits",
+        "Supports List, Set, and custom collection types",
+        "Explicit DTO class specification for complex scenarios",
+        "Flexible null handling strategies",
+        "Compile-time validation of nested DTO classes",
+        "Zero-copy nested mapping for maximum performance"
+      ],
+      "alert": {
+        "variant": "success",
+        "title": "Smart Detection",
+        "content": "CrudX automatically detects nested DTOs by naming convention • If your entity has a User field and a UserResponse DTO exists, mapping happens automatically • Specify dtoClass only when you need a specific DTO variant"
+      }
+    }
+  ],
+  "pagination": {
+    "previous": {
+      "title": "Quick Setup",
+      "path": "/quick-setup"
+    },
+    "next": {
+      "title": "Base Entities",
+      "path": "/base-entities"
+    }
+  }
+}

@@ -33,21 +33,6 @@ export default function RestEndpoints() {
           </p>
         </div>
 
-        {/* Introduction */}
-        {/* <section id="introduction" className="prose mb-12">
-          <h2>Introduction</h2>
-          <p>
-            Premium Docs makes it easy to build RESTful APIs with decorators and
-            TypeScript. Define your endpoints using method decorators and let the
-            framework handle routing, validation, and serialization.
-          </p>
-
-          <Alert variant="success" title="Auto Documentation">
-            All endpoints are automatically documented and can be exported to
-            OpenAPI/Swagger format.
-          </Alert>
-        </section> */}
-
         {/* Available Endpoints */}
         <section id="available-endpoints" className="prose mb-12">
           <h2>Available Endpoints</h2>

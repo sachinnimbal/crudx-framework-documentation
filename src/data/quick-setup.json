@@ -1,0 +1,114 @@
+{
+  "page": {
+    "title": "Quick Setup",
+    "description": "Get started with CrudX in just a few simple steps and have your CRUD REST API up and running quickly.",
+    "badge": {
+      "text": "5-Minute Setup",
+      "variant": "success"
+    },
+    "breadcrumbs": [
+      { "label": "Getting Started", "path": "/overview" },
+      { "label": "Quick Setup" }
+    ]
+  },
+  "tableOfContents": [
+    { "id": "quick-setup", "title": "Quick Setup", "level": 2 },
+    { "id": "add-dependencies", "title": "Add Dependencies", "level": 2 },
+    { "id": "enable-crudx", "title": "Enable CrudX", "level": 2 },
+    { "id": "configure-database", "title": "Configure Database", "level": 2 },
+    { "id": "create-entity", "title": "Create Your Entity", "level": 2 },
+    { "id": "create-controller", "title": "Create Controller", "level": 2 }
+  ],
+  "sections": [
+    {
+      "id": "add-dependencies",
+      "title": "1. Add Dependencies",
+      "description": "Add CrudX to your project using Gradle or Maven:",
+      "tabs": [
+        {
+          "id": "gradle",
+          "label": "Gradle (build.gradle)",
+          "code": "dependencies {\n    implementation 'io.github.sachinnimbal:crudx-starter:1.0.1'\n    // Choose your database\n    runtimeOnly 'com.mysql:mysql-connector-j'\n    // OR runtimeOnly 'org.postgresql:postgresql'\n    // OR implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'\n}",
+          "language": "groovy"
+        },
+        {
+          "id": "maven",
+          "label": "Maven (pom.xml)",
+          "code": "<dependency>\n    <groupId>io.github.sachinnimbal</groupId>\n    <artifactId>crudx-starter</artifactId>\n    <version>1.0.1</version>\n</dependency>\n<!-- Add database driver -->\n<dependency>\n    <groupId>com.mysql</groupId>\n    <artifactId>mysql-connector-j</artifactId>\n</dependency>",
+          "language": "xml"
+        }
+      ]
+    },
+    {
+      "id": "enable-crudx",
+      "title": "2. Enable CrudX",
+      "description": "Add @CrudX annotation to your Spring Boot application class:",
+      "example": {
+        "code": "@SpringBootApplication\n@CrudX // 👈 Add this annotation\npublic class MyApplication {\n    public static void main(String[] args) {\n        SpringApplication.run(MyApplication.class, args);\n    }\n}",
+        "language": "java"
+      },
+      "alert": {
+        "variant": "info",
+        "title": "What happens behind the scenes",
+        "content": "Scans for CrudX controllers and entities • Auto-generates repositories and services • Configures database connections • Enables REST endpoint generation"
+      }
+    },
+    {
+      "id": "configure-database",
+      "title": "3. Configure Database",
+      "description": "Add database configuration to application.yml or application.properties:",
+      "tabs": [
+        {
+          "id": "mysql",
+          "label": "MySQL",
+          "code": "spring:\n  datasource:\n    url: jdbc:mysql://localhost:3306/mydb\n    username: root\n    password: password\n    driver-class-name: com.mysql.cj.jdbc.Driver\n  jpa:\n    hibernate:\n      ddl-auto: update\n    properties:\n      hibernate:\n        dialect: org.hibernate.dialect.MySQL8Dialect",
+          "language": "yaml"
+        },
+        {
+          "id": "postgresql",
+          "label": "PostgreSQL",
+          "code": "spring:\n  datasource:\n    url: jdbc:postgresql://localhost:5432/mydb\n    username: postgres\n    password: password\n  jpa:\n    properties:\n      hibernate:\n        dialect: org.hibernate.dialect.PostgreSQLDialect",
+          "language": "yaml"
+        },
+        {
+          "id": "mongodb",
+          "label": "MongoDB",
+          "code": "spring:\n  data:\n    mongodb:\n      uri: mongodb://localhost:27017/mydb\n      database: mydb",
+          "language": "yaml"
+        }
+      ]
+    },
+    {
+      "id": "create-entity",
+      "title": "4. Create Your Entity",
+      "description": "Extend the appropriate CrudX base class for your database:",
+      "example": {
+        "code": "import io.github.sachinnimbal.crudx.entity.CrudXMySQLEntity;\nimport jakarta.persistence.*;\nimport lombok.Data;\n\n@Entity\n@Table(name = \"employees\")\n@Data\npublic class Employee extends CrudXMySQLEntity<Long> {\n    @Column(nullable = false)\n    private String name;\n    \n    @Column(unique = true, nullable = false)\n    private String email;\n    \n    private String department;\n    private Double salary;\n}",
+        "language": "java"
+      },
+      "alert": {
+        "variant": "success",
+        "title": "Choose the right base class",
+        "content": "<strong>CrudXMySQLEntity&lt;ID&gt;</strong> - For MySQL/MariaDB<br/><strong>CrudXPostgreSQLEntity&lt;ID&gt;</strong> - For PostgreSQL<br/><strong>CrudXMongoEntity&lt;ID&gt;</strong> - For MongoDB"
+      }
+    },
+    {
+      "id": "create-controller",
+      "title": "5. Create Controller",
+      "description": "Extend CrudXController - that's it! No additional code needed:",
+      "example": {
+        "code": "import io.github.sachinnimbal.crudx.controller.CrudXController;\nimport org.springframework.web.bind.annotation.*;\n\n@RestController\n@RequestMapping(\"/api/employees\")\npublic class EmployeeController extends CrudXController<Employee, Long> {\n    // That's it! 11 REST endpoints are auto-generated:\n    // POST   /api/employees          - Create single\n    // POST   /api/employees/batch    - Create batch\n    // GET    /api/employees          - Get all\n    // GET    /api/employees/paged    - Get paginated\n    // GET    /api/employees/{id}     - Get by ID\n    // PATCH  /api/employees/{id}     - Partial update\n    // DELETE /api/employees/{id}     - Delete by ID\n    // DELETE /api/employees/batch    - Delete batch\n    // GET    /api/employees/count    - Count all\n    // GET    /api/employees/exists/{id} - Check existence\n    \n    // Add custom endpoints or lifecycle hooks here (optional)\n}",
+        "language": "java"
+      },
+      "alert": {
+        "variant": "success",
+        "title": "You're All Set!",
+        "content": "Your API is now ready! Start your application and test the endpoints:<br/><br/><code>http://localhost:8080/api/employees</code><br/><code>http://localhost:8080/swagger-ui/index.html</code> - Swagger UI"
+      }
+    }
+  ],
+  "pagination": {
+    "previous": { "title": "Overview", "path": "/overview" },
+    "next": { "title": "Annotations", "path": "/annotations" }
+  }
+}
