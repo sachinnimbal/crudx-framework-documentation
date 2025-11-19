@@ -33,7 +33,7 @@
     {
       "id": "mysql-entity",
       "title": "CrudXMySQLEntity<ID>",
-      "version": "v1.0+",
+      "version": "Since v1.0.0",
       "description": "Base class for MySQL entities with auto-increment ID generation.",
       "target": "Entity Classes",
       "metadata": {
@@ -53,7 +53,7 @@
     {
       "id": "postgresql-entity",
       "title": "CrudXPostgreSQLEntity<ID>",
-      "version": "v1.0+",
+      "version": "Since v1.0.0",
       "description": "Base class for PostgreSQL entities with sequence-based ID generation.",
       "target": "Entity Classes",
       "metadata": {
@@ -73,7 +73,7 @@
     {
       "id": "mongo-entity",
       "title": "CrudXMongoEntity<ID>",
-      "version": "v1.0+",
+      "version": "Since v1.0.0",
       "description": "Base class for MongoDB documents with flexible schema.",
       "target": "Document Classes",
       "metadata": {

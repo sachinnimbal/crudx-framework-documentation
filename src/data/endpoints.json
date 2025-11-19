@@ -1,11 +1,11 @@
 [
   {
-    "method": "GET",
-    "path": "/api/customers",
-    "description": "Retrieve all customers",
+    "method": "POST",
+    "path": "/api/user",
+    "description": "Create a new user entity",
     "example": {
-      "curl": "curl -X GET http://localhost:8080/api/customers \\\n  -H \"Content-Type: application/json\"",
-      "response": "{\n  \"data\": [\n    { \"id\": 1, \"firstName\": \"John\", \"lastName\": \"Doe\", \"email\": \"john@example.com\" }\n  ],\n  \"total\": 1\n}"
+      "curl": "curl -X 'POST' \\\n  'http://localhost:8080/api/user' \\\n  -H 'accept: */*' \\\n  -H 'Content-Type: application/json' \\\n  -d '{\n  \"firstName\": \"CrudX\",\n  \"lastName\": \"Starter\",\n  \"email\": \"crudx.starter@example.com\",\n  \"audit\": {\n    \"createdBy\": \"crudx@admin.com\"\n  }\n}'",
+      "response": "{\n  \"success\": true,\n  \"message\": \"Entity created successfully\",\n  \"statusCode\": 201,\n  \"status\": \"CREATED\",\n  \"data\": {\n    \"id\": \"6900a91bcf4472177ba2285f\",\n    \"audit\": {\n      \"createdAt\": \"2025-10-28 16:59:31\",\n      \"createdBy\": \"crudx@admin.com\",\n      \"updatedAt\": \"2025-10-28 16:59:31\",\n      \"updatedBy\": null\n    },\n    \"firstName\": \"CrudX\",\n    \"lastName\": \"Starter\",\n    \"email\": \"crudx.starter@example.com\"\n  },\n  \"timestamp\": \"2025-10-28T16:59:31.453776\",\n  \"executionTime\": \"111 ms\"\n}"
     }
   },
   {

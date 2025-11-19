@@ -1,0 +1,44 @@
+Responses
+Curl
+
+curl -X 'POST' \
+  'http://localhost:8080/api/user' \
+  -H 'accept: */*' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "firstName": "CrudX",
+  "lastName": "Starter",
+"email": "crudx.starter@example.com",
+  "audit": {
+    "createdBy": "crudx@admin.com"
+  }
+}'
+Request URL
+http://localhost:8080/api/user
+Server response
+Code	Details
+201
+Undocumented
+Response body
+Download
+{
+  "success": true,
+  "message": "Entity created successfully",
+  "statusCode": 201,
+  "status": "CREATED",
+  "data": {
+    "id": "6900a91bcf4472177ba2285f",
+    "audit": {
+      "createdAt": "2025-10-28 16:59:31",
+      "createdBy": "crudx@admin.com",
+      "updatedAt": "2025-10-28 16:59:31",
+      "updatedBy": null
+    },
+    "firstName": "CrudX",
+    "lastName": "Starter",
+    "email": "crudx.starter@example.com"
+  },
+  "timestamp": "2025-10-28T16:59:31.453776",
+  "executionTime": "111 ms"
+}
+  

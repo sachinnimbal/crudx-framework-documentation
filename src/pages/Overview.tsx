@@ -78,7 +78,7 @@ export default function Overview() {
                 <ArrowRightIcon className="w-4 h-4" />
               </Link>
               <a
-                href="https://github.com/sachinnimbal/crudx-framework"
+                href="https://github.com/sachinnimbal/crudx-starter"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-6 py-3 border border-border rounded-lg font-medium hover:bg-accent focus-ring transition-colors"
