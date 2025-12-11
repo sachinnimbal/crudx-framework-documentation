@@ -45,7 +45,7 @@ steps:
 # ---------------------------
 - task: AzureWebApp@1
   inputs:
-    azureSubscription: 'sachinnimbal'
+    azureSubscription: 'crudx-starter'
     appName: 'crudx-framework'
     appType: 'webApp'       
     package: '$(Build.ArtifactStagingDirectory)/drop'
