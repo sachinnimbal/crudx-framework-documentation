@@ -1,0 +1,52 @@
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+# ---------------------------
+# Install Node.js
+# ---------------------------
+- task: NodeTool@0
+  inputs:
+    versionSpec: '20.x'
+  displayName: 'Install Node.js'
+
+# ---------------------------
+# Install Dependencies & Build
+# ---------------------------
+- script: |
+    npm install
+    npm run build
+  displayName: 'npm install and build'
+
+# ---------------------------
+# Publish Build Artifacts (Dist folder)
+# ---------------------------
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(System.DefaultWorkingDirectory)'
+    Contents: |
+      dist/**
+      package.json
+      package-lock.json
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+  displayName: 'Copy build artifacts'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: '$(Build.ArtifactStagingDirectory)'
+    artifactName: 'drop'
+  displayName: 'Publish Artifacts'
+
+# ---------------------------
+# Deploy to Azure App Service
+# ---------------------------
+- task: AzureWebApp@1
+  inputs:
+    azureSubscription: 'sachinnimbal'
+    appName: 'crudx-framework'
+    appType: 'webApp'       
+    package: '$(Build.ArtifactStagingDirectory)/drop'
+  displayName: 'Deploy to Azure App Service'
